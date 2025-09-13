@@ -1,0 +1,38 @@
+.section {
+  width: 1440px;
+  height: 700px;
+  padding: 436px 328px 60px;
+  background-image: url(../../assets/MainCar.png);
+}
+.title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 120%;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.subtitle {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 40px;
+}
+.button {
+  border-radius: 12px;
+  padding: 12px 88px;
+  width: 276px;
+  height: 44px;
+
+  background: #3470ff;
+
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  color: #fff;
+}

@@ -1,0 +1,15 @@
+.header {
+  border-bottom: 1px solid #f2f4f7;
+  padding: 24px 120px;
+  width: 1440px;
+  height: 68px;
+  background: #f2f4f7;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  color: #101828;
+}
+.span {
+  color: #3470ff;
+}

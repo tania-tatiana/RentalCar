@@ -1,0 +1,88 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  justify-content: center;
+}
+.item {
+  max-width: 276px;
+  flex: 0 0 calc((100% - 96px) / 4);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.image {
+  border-radius: 14px;
+  width: 276px;
+  height: 268px;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 23, 0.5) 0%,
+    rgba(18, 20, 23, 0.5) 100%
+  );
+  margin-bottom: 16px;
+}
+.firstLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.brand {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #101828;
+}
+.model {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #3470ff;
+}
+.year {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #101828;
+}
+.rentalPrice {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #101828;
+}
+
+.detailsLine {
+  text-align: start;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+  color: #8d929a;
+  margin-bottom: 28px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 12px;
+  padding: 12px;
+  width: 276px;
+  height: 44px;
+  background: #3470ff;
+
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  color: #fff;
+}

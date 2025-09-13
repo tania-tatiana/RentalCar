@@ -1,0 +1,20 @@
+.wrapper {
+  text-align: center;
+  margin-top: 100%;
+}
+.title {
+  font-size: 72px;
+  margin-bottom: 20px;
+}
+.text {
+  font-style: 24px;
+  margin-bottom: 30px;
+}
+.link {
+  font-style: 18px;
+  padding: 10px 20px;
+  background-color: #3470ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
