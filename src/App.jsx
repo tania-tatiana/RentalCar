@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { lazy, Suspense } from "react";
 import AppBar from "./components/AppBar/AppBar";
 // import HomePage from "./pages/HomePage/HomePage";
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -11,7 +12,6 @@ const CarDetailsPage = lazy(() =>
 );
 // import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
-import { lazy, Suspense } from "react";
 
 function App() {
   return (

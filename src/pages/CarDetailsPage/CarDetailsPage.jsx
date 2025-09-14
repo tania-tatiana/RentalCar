@@ -8,6 +8,8 @@ export default function CarDetailsPage() {
   const { id } = useParams();
   const [car, setCar] = useState(null);
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     fetchCarsById(id).then((data) => setCar(data));
   }, [id]);
@@ -16,8 +18,8 @@ export default function CarDetailsPage() {
     setCars((previousCars) => {
       return [...previousCars, newCar];
     });
+    setSuccessMessage("Your car rental request was successful!");
   };
-  console.log(cars);
 
   return (
     <>
@@ -25,6 +27,7 @@ export default function CarDetailsPage() {
         <section className={css.section}>
           <div className={css.leftSide}>
             <img src={car.img} alt="Car" className={css.image} />
+            {successMessage && <p className={css.success}>{successMessage}</p>}
             <CarForm onSubmit={addNewCar} />
           </div>
           <div className={css.rightSide}>
@@ -39,7 +42,9 @@ export default function CarDetailsPage() {
                 {car.address.split(",")[1].trim() || "Unknown city"},{" "}
                 {car.address.split(",")[2].trim() || "Unknown country"}
               </p>
-              <p className={css.mileage}>Mileage: {car.mileage}</p>
+              <p className={css.mileage}>
+                Mileage: {car.mileage.toLocaleString()} km
+              </p>
             </div>
             <p className={css.price}>${car.rentalPrice}</p>
             <p className={css.description}>{car.description}</p>
@@ -70,7 +75,7 @@ export default function CarDetailsPage() {
                 Accessories and functionalities:
               </h3>
               <ul className={css.list}>
-                {[...car.accessories, car.functionalities].map(
+                {[...car.accessories, ...car.functionalities].map(
                   (item, index) => (
                     <li key={index} className={css.item}>
                       {item}

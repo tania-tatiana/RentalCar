@@ -92,6 +92,8 @@
   line-height: 125%;
   color: #fff;
   align-self: center;
+
+  cursor: pointer;
 }
 .error {
   position: absolute;
