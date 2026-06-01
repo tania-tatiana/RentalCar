@@ -1,13 +1,27 @@
 .section {
-  width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
   height: 700px;
-  padding: 436px 328px 60px;
+
+  /* margin-top: 68px;  */
+   padding: 436px 328px 60px;
+
   background-image: url(../../assets/MainCar.png);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  text-align: center;
 }
 .title {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 60px;
+  min-width: 900px;
   line-height: 120%;
   text-align: center;
   color: #fff;

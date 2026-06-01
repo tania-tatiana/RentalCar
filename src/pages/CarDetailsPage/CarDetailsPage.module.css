@@ -43,6 +43,7 @@
 }
 .locationAndMileage {
   display: flex;
+  gap: 100px;  
   margin-bottom: 16px;
 }
 .location {

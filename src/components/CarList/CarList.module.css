@@ -2,12 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
-  padding-top: 48px;
-  padding-bottom: 48px;
-  justify-content: center;
+  padding: 48px 0;
+  justify-content: flex-start;
 }
 .item {
-  max-width: 276px;
   flex: 0 0 calc((100% - 96px) / 4);
   box-sizing: border-box;
   display: flex;

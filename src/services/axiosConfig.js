@@ -20,8 +20,17 @@ export const fetchCars = async (
 };
 
 export const fetchCarsById = async (id) => {
-  const response = await axios.get(`cars/${id}`);
-  return response.data;
+  // const response = await axios.get(`cars/${id}`);
+  // return response.data;
+  try {
+    const response = await axios.get(`/cars/${id}`);
+    return response.data;
+  } catch (error) {
+      if(error.response?.status === 404) {
+        return null;
+      }
+      return null;
+    }
 };
 
 export const fetchBrands = async () => {
