@@ -9,7 +9,7 @@ export default function CarDetailsPage() {
   const { id } = useParams();
   const [car, setCar] = useState(undefined);
 
-  const [successMessage, setSuccessMessage] = useState("");
+  // const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function CarDetailsPage() {
     setCars((previousCars) => {
       return [...previousCars, newCar];
     });
-    setSuccessMessage("Your car rental request was successful!");
+    // setSuccessMessage("Your car rental request was successful!");
   };
 
   if (loading) return <div>Loading...</div>
@@ -43,7 +43,7 @@ export default function CarDetailsPage() {
         <section className={css.section}>
           <div className={css.leftSide}>
             <img src={car.img} alt="Car" className={css.image} />
-            {successMessage && <p className={css.success}>{successMessage}</p>}
+            {/* {successMessage && <p className={css.success}>{successMessage}</p>} */}
             <CarForm onSubmit={addNewCar} />
           </div>
           <div className={css.rightSide}>

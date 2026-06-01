@@ -17,8 +17,8 @@
 .image {
   width: 100%;
   border-radius: 19px;
-  width: 640px;
-  height: 512px;
+  min-width: 640px;
+  min-height: 512px;
 }
 .carAndId {
   display: flex;

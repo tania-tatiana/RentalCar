@@ -1,18 +1,19 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 import css from "./CarForm.module.css";
 import * as Yup from "yup";
 
 const CarSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Minimum 3 chars")
-    .max(10, "Maximum 10 chars")
+    .max(50, "Maximum 50 chars")
     .required("This field is required"),
   email: Yup.string().email().required("This field is required"),
-  date: Yup.string()
-    .min(5, "Minimum 5 chars")
-    .max(10, "Maximum 10 chars")
-    .required("This field is required"),
+  date: Yup.date()
+    .required("This field is required").min(new Date(), "Date must be in the future"),
   comment: Yup.string()
     .min(3, "Minimum 3 chars")
     .max(50, "Maximum 50 chars")
@@ -25,18 +26,20 @@ export default function CarForm({ onSubmit }) {
   const handleSubmit = (values, helpers) => {
     onSubmit(values);
     helpers.resetForm();
+  toast.success("Your car rental request was successful!");
   };
   return (
     <Formik
       initialValues={{
         name: "",
         email: "",
-        date: "",
+        date: null,
         comment: "",
       }}
       validationSchema={CarSchema}
       onSubmit={handleSubmit}
     >
+      {({setFieldValue, values}) =>
       <Form className={css.form}>
         <div className={css.text}>
           <p className={css.title}>Book your car now</p>
@@ -64,14 +67,16 @@ export default function CarForm({ onSubmit }) {
           />
           <ErrorMessage name="email" component="p" className={css.error} />
         </div>
-        <div className={css.wrapper}>
-          <Field
-            type="text"
+        <div className={css.dateWrapper}>
+          <DatePicker
             name="date"
-            className={css.input}
+            className={css.dateInput}
             id={`${fieldId}-date`}
-            placeholder="Booking date"
-          />
+            placeholderText="Booking date" 
+            minDate={new Date()}
+            selected={values.date} 
+            onChange={(date) => setFieldValue("date", date)} />
+
           <ErrorMessage name="date" component="p" className={css.error} />
         </div>
         <div className={css.wrapper}>
@@ -88,6 +93,7 @@ export default function CarForm({ onSubmit }) {
           Send
         </button>
       </Form>
+}
     </Formik>
   );
 }

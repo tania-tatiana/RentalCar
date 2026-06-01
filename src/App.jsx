@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 import "./App.css";
 import { lazy, Suspense } from "react";
 import AppBar from "./components/AppBar/AppBar";
@@ -18,6 +19,7 @@ function App() {
     <>
       <Suspense fallback={<div>Loading...</div>}>
       <AppBar />
+      <Toaster position="top-right" reverseOrder={false}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/cars" element={<CatalogPage />} />
