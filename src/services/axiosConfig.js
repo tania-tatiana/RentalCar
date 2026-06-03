@@ -13,7 +13,7 @@ export const fetchCars = async (
       mileageFrom,
       mileageTo,
       page: currentPage,
-      hitsPerPage: 5,
+      // hitsPerPage: 5,
     },
   });
   return response.data;

@@ -24,7 +24,7 @@ export default function CarList({ cars }) {
               </p>
             </div>
             <p className={css.detailsLine}>
-              {car.type} | {car.mileage}
+              {car.type} | {car.mileage.toLocaleString("uk-UA")}
             </p>
             <Link className={css.button} to={`/cars/${car.id}`}>
               Read more

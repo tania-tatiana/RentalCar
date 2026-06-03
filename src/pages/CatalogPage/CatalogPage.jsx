@@ -41,6 +41,7 @@ export default function CatalogPage() {
   }), [searchParams]);
 
   const incrementPage = () => {
+    if (isLoadingMore) return;
     setIsLoadingMore(true);
     setCurrentPage(currentPage + 1);
   };
@@ -67,13 +68,13 @@ export default function CatalogPage() {
       }
     }
     fetchData();
-  }, [currentPage, searchParams, filters]);
+  }, [currentPage, filters]);
 
   const filteredCars = cars.filter((car) => {
     return (
       (filters.brand ? car.brand === filters.brand : true) &&
       (filters.price
-        ? Number(car.rentalPrice) === Number(filters.price)
+        ? Number(car.rentalPrice) <= Number(filters.price)
         : true) &&
       (filters.mileageFrom
         ? car.mileage >= Number(filters.mileageFrom)
@@ -98,7 +99,7 @@ export default function CatalogPage() {
       ) : (
         !isLoading && <p>Cars not found</p>
       )}
-      {filteredCars.length > 0 && !isLoading && currentPage !== totalPages && (
+      {filteredCars.length > 0 && !isLoading && !isLoadingMore && currentPage < totalPages && (
         <button onClick={incrementPage} className={css.button} disabled={isLoadingMore}>{isLoadingMore ? (<TailSpin height="20" width="20" color="#3470ff" />) : ("Load more")}
           
         </button>
