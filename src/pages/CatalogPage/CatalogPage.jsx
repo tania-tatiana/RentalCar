@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import { TailSpin } from 'react-loader-spinner';
 
 
-export default function CatalogPage() {
+export default function CatalogPage({favorites, onToggleFavorites}) {
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -95,7 +95,7 @@ export default function CatalogPage() {
       {isError && <p>Error</p>}
       {<Filter onFilter={handleSearch} />}
       {filteredCars.length > 0 ? (
-        <CarList cars={filteredCars} />
+        <CarList cars={filteredCars} favorites={favorites} onToggleFavorites={onToggleFavorites}/>
       ) : (
         !isLoading && <p>Cars not found</p>
       )}

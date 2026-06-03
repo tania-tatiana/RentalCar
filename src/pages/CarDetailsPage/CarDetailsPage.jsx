@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { fetchCarsById } from "../../services/axiosConfig";
 import CarForm from "../../components/CarForm/CarForm";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { TailSpin } from 'react-loader-spinner';
+import { TailSpin } from "react-loader-spinner";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-export default function CarDetailsPage() {
+export default function CarDetailsPage({ favorites, onToggleFavorites }) {
   const [cars, setCars] = useState([]);
   const { id } = useParams();
   const [car, setCar] = useState(undefined);
@@ -14,22 +15,23 @@ export default function CarDetailsPage() {
   // const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const isFavorite = favorites.some((item) => item.id === car.id);
+
   useEffect(() => {
     // fetchCarsById(id).then((data) => setCar(data.data));
     const getCar = async () => {
-    
       setLoading(true);
       const data = await fetchCarsById(id);
-        setCar(data);
-        setLoading(false)
-    }
+      setCar(data);
+      setLoading(false);
+    };
 
-  getCar();
+    getCar();
   }, [id]);
 
   const addNewCar = (newCar) => {
     console.log(cars);
-    
+
     setCars((previousCars) => {
       return [...previousCars, newCar];
     });
@@ -38,13 +40,16 @@ export default function CarDetailsPage() {
 
   return (
     <>
-    {loading && <div className={css.loader}><TailSpin
-        height="80"
-        width="80"
-        color="#4fa94d"
-        ariaLabel="tail-spin-loading"
-        
-      /></div>}
+      {loading && (
+        <div className={css.loader}>
+          <TailSpin
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+          />
+        </div>
+      )}
       {!car && !loading && <NotFoundPage />}
       {car && (
         <section className={css.section}>
@@ -63,15 +68,27 @@ export default function CarDetailsPage() {
             <div className={css.locationAndMileage}>
               <p className={css.location}>
                 {car.address?.split(",")[1]?.trim() || "Unknown city"},{" "}
-  {car.address?.split(",")[2]?.trim() || "Unknown country"}
+                {car.address?.split(",")[2]?.trim() || "Unknown country"}
               </p>
               <p className={css.mileage}>
                 Mileage: {car.mileage?.toLocaleString("uk-UA")} km
               </p>
             </div>
-            <p className={css.price}>${car.rentalPrice}</p>
-            <p className={css.description}>{car.description}</p>
+            <div className={css.priceAndFavorite}>
+              <p className={css.price}>${car.rentalPrice}</p>
+              <button
+                className={css.favorite}
+                onClick={() => onToggleFavorites(car)}
+              >
+                {isFavorite ? (
+                  <FaHeart className={css.heartActive} />
+                ) : (
+                  <FaRegHeart className={css.heart} />
+                )}
+              </button>
+            </div>
 
+            <p className={css.description}>{car.description}</p>
             <div className={css.descriptionItem}>
               <h3 className={css.nameOfList}>Rental Conditions: </h3>
               <ul className={css.list}>
@@ -98,13 +115,14 @@ export default function CarDetailsPage() {
                 Accessories and functionalities:
               </h3>
               <ul className={css.list}>
-                {[...(car.accessories || []), ...(car.functionalities || [])].map(
-                  (item, index) => (
-                    <li key={index} className={css.item}>
-                      {item}
-                    </li>
-                  )
-                )}
+                {[
+                  ...(car.accessories || []),
+                  ...(car.functionalities || []),
+                ].map((item, index) => (
+                  <li key={index} className={css.item}>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

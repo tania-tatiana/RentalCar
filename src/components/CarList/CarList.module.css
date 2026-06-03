@@ -28,6 +28,12 @@
   align-items: center;
   margin-bottom: 8px;
 }
+.secondLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
 .brand {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
@@ -64,7 +70,6 @@
   font-size: 12px;
   line-height: 133%;
   color: #8d929a;
-  margin-bottom: 28px;
 }
 
 .button {
@@ -85,4 +90,24 @@
   color: #fff;
 
   cursor: pointer;
+}
+
+.favorite {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heartActive {
+  font-size: 12px;
+  color: #e63946;
+}
+
+.heart {
+  font-size: 12px;
+  color: #8d929a;
 }

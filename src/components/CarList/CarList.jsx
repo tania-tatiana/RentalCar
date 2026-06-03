@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import css from "./CarList.module.css";
-export default function CarList({ cars }) {
+export default function CarList({ cars, favorites, onToggleFavorites }) {
+  const isFavorites = favorites.some((favorite) => favorite.id === cars.id);
   return (
     <ul className={css.list}>
       {cars.map((car) => {
@@ -22,6 +24,16 @@ export default function CarList({ cars }) {
               <p className={css.detailsLine}>
                 {city} | {country} | {car.rentalCompany}
               </p>
+              <button
+                className={css.favorite}
+                onClick={() => onToggleFavorites(car)}
+              >
+                {isFavorites ? (
+                  <FaHeart className={css.heartActive} />
+                ) : (
+                  <FaRegHeart className={css.heart} />
+                )}
+              </button>
             </div>
             <p className={css.detailsLine}>
               {car.type} | {car.mileage.toLocaleString("uk-UA")}

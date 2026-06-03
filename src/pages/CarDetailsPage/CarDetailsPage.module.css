@@ -60,6 +60,9 @@
   line-height: 125%;
   color: #101828;
 }
+.priceAndFavorite {
+  display: flex;
+}
 .price {
   font-family: "Manrope", sans-serif;
   font-weight: 600;
@@ -128,4 +131,25 @@
 
   background: rgba(255, 255, 255, 0.5);
   z-index: 1000;
+}
+
+.favorite {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.heartActive {
+  font-size: 24px;
+  color: #e63946;
+}
+
+.heart {
+font-size: 24px;
+color: #8d929a;
 }
