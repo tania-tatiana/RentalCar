@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CarList from "../../components/CarList/CarList";
 import { fetchCars } from "../../services/axiosConfig";
 import css from "./CatalogPage.module.css";
 import Filter from "../../components/Filter/Filter";
 import { useSearchParams } from "react-router-dom";
+import { TailSpin } from 'react-loader-spinner';
+
 
 export default function CatalogPage() {
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,17 +33,18 @@ export default function CatalogPage() {
     setCars([]);
   };
 
-  const filters = {
+  const filters = useMemo(() => ({
     brand: searchParams.get("brand") || "",
     price: searchParams.get("price") ? Number(searchParams.get("price")) : "",
     mileageFrom: searchParams.get("mileageFrom") || "",
     mileageTo: searchParams.get("mileageTo") || "",
-  };
+  }), [searchParams]);
 
   const incrementPage = () => {
+    setIsLoadingMore(true);
     setCurrentPage(currentPage + 1);
   };
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -59,10 +63,11 @@ export default function CatalogPage() {
         setIsError(true);
       } finally {
         setIsLoading(false);
+        setIsLoadingMore(false);
       }
     }
     fetchData();
-  }, [currentPage, searchParams]);
+  }, [currentPage, searchParams, filters]);
 
   const filteredCars = cars.filter((car) => {
     return (
@@ -79,8 +84,14 @@ export default function CatalogPage() {
 
   return (
     <>
-      {isLoading && <p>Loading</p>}
-      {isError && <p>Loading</p>}
+      {isLoading && <div className={css.loader}><TailSpin
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="tail-spin-loading"
+        
+      /></div>}
+      {isError && <p>Error</p>}
       {<Filter onFilter={handleSearch} />}
       {filteredCars.length > 0 ? (
         <CarList cars={filteredCars} />
@@ -88,8 +99,8 @@ export default function CatalogPage() {
         !isLoading && <p>Cars not found</p>
       )}
       {filteredCars.length > 0 && !isLoading && currentPage !== totalPages && (
-        <button onClick={incrementPage} className={css.button}>
-          Load more
+        <button onClick={incrementPage} className={css.button} disabled={isLoadingMore}>{isLoadingMore ? (<TailSpin height="20" width="20" color="#3470ff" />) : ("Load more")}
+          
         </button>
       )}
     </>

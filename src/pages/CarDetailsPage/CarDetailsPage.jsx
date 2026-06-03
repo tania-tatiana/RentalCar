@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { fetchCarsById } from "../../services/axiosConfig";
 import CarForm from "../../components/CarForm/CarForm";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import { TailSpin } from 'react-loader-spinner';
+
 export default function CarDetailsPage() {
   const [cars, setCars] = useState([]);
   const { id } = useParams();
@@ -34,11 +36,16 @@ export default function CarDetailsPage() {
     // setSuccessMessage("Your car rental request was successful!");
   };
 
-  if (loading) return <div>Loading...</div>
-  if (!car) return <NotFoundPage />;
-
   return (
     <>
+    {loading && <div className={css.loader}><TailSpin
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="tail-spin-loading"
+        
+      /></div>}
+      {!car && !loading && <NotFoundPage />}
       {car && (
         <section className={css.section}>
           <div className={css.leftSide}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import css from "./Filter.module.css";
 import { fetchBrands } from "../../services/axiosConfig";
+import { TailSpin } from 'react-loader-spinner';
 
 export default function Filter({ onFilter }) {
   const [brand, setBrand] = useState("");
@@ -10,6 +11,7 @@ export default function Filter({ onFilter }) {
   const [mileageTo, setMileageTo] = useState("");
 
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const prices = [30, 40, 50, 60, 70, 80];
 
@@ -22,8 +24,11 @@ export default function Filter({ onFilter }) {
     const getBrands = async () => {
       try {
         setIsError(false);
+        setIsLoading(true);
         const data = await fetchBrands();
         setBrands(data);
+        setIsLoading(false);
+
       } catch {
         setIsError(true);
       }
@@ -33,7 +38,14 @@ export default function Filter({ onFilter }) {
 
   return (
     <>
-      {isError && <p>Loading</p>}
+      {isLoading && <div className={css.loader}><TailSpin
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="tail-spin-loading"
+        
+      /></div>}
+      {isError && !isLoading && <p>Failed to load brands</p>}
       <form onSubmit={handleSubmit} className={css.form}>
         <label className={css.label}>
           Car brand
