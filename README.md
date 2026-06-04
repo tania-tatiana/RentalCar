@@ -1,7 +1,5 @@
 # 🚗 Car Rental App
 
----
-
 ## 📌 Description
 
 Car Rental App is a web application that allows users to browse a catalog of cars, filter them by various parameters, view detailed information about each car, book a rental through a booking form, and add cars you like to your favorites.
