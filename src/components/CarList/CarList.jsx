@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import css from "./CarList.module.css";
 export default function CarList({ cars, favorites, onToggleFavorites }) {
-  const isFavorites = favorites.some((favorite) => favorite.id === cars.id);
+  
   return (
     <ul className={css.list}>
       {cars.map((car) => {
+      const isFavorites = favorites.some((favorite) => favorite.id === car.id)
         const parts = car.address.split(",").map((car) => car.trim());
         const city = parts[1] || "Unknown city";
         const country = parts[2] || "Unknown country";

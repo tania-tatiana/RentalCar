@@ -15,7 +15,7 @@ export default function CarDetailsPage({ favorites, onToggleFavorites }) {
   // const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const isFavorite = favorites.some((item) => item.id === car.id);
+  const isFavorite = car && favorites.some((item) => item.id === car.id);
 
   useEffect(() => {
     // fetchCarsById(id).then((data) => setCar(data.data));

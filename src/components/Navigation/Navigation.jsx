@@ -15,6 +15,9 @@ export default function Navigation() {
       <NavLink to="/cars" className={getActiveLinksClass}>
         Catalog
       </NavLink>
+      <NavLink to="/favorites" className={getActiveLinksClass}>
+        Favorites
+      </NavLink>
     </nav>
   );
 }
